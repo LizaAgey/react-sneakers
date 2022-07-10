@@ -1,0 +1,88 @@
+// variables 
+$light-blue: #E7F6FF;
+$light-white: #FFFFFF;
+$border: 1px solid #EAEAEA;
+$box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+$base: 5px;
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: $light-blue;
+}
+
+.wrapper {
+background: $light-white;
+box-shadow: $box-shadow;
+border-radius: 4 * $base;
+max-width: 256 * $base;
+margin: 10*$base auto;
+}
+
+.logo {
+  width: 8*$base;
+  height: 8*$base;
+}
+
+header {
+  border: $border;
+
+  h3, p {
+    margin: 0;
+  }
+}
+
+.content {
+  h1 {
+    margin: 0;
+  }
+}
+
+button {
+  img {
+    width: 2*$base;
+    height: 2*$base;
+  }
+background-color: $light-white;
+border: $border;
+box-sizing: border-box;
+border-radius: 1.6*$base;
+height: 6.4*$base;
+width: 6.4*$base;
+cursor: pointer;
+
+}
+
+.sneaker-img {
+  width: 26.6*$base;
+  height: 24.4*$base;
+}
+
+.card {
+  border: $border;
+  padding: 4*$base;
+  width: 44*$base;
+  border-radius: 8 * $base;
+  margin: 8*$base;
+
+  h5 {
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  span {
+    font-size: 13px;
+    opacity: 0.5;
+  }
+
+  b {
+    font-size: 14px;
+  }
+}
+
+.sneaker-price {
+  width: 30*$base;
+}
