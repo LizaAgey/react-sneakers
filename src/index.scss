@@ -1,44 +1,32 @@
-// variables 
+// VARIABLES:
 $light-blue: #E7F6FF;
 $light-white: #FFFFFF;
+$light-green: #9DD458;
 $border: 1px solid #EAEAEA;
 $box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+$box-shadow-strong: -10px 4px 24px rgba(0, 0, 0, 0.1);
 $base: 5px;
+
+//GENERAL:
 
 body {
   margin: 0;
-  font-family: 'Inter', system-ui;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   background-color: $light-blue;
 }
 
+* {
+  font-family: 'Inter', system-ui;
+}
+
 .wrapper {
-background: $light-white;
-box-shadow: $box-shadow;
-border-radius: 4 * $base;
-max-width: 256 * $base;
-margin: 10*$base auto;
-}
-
-.logo {
-  width: 8*$base;
-  height: 8*$base;
-}
-
-header {
-  border: $border;
-
-  h3, p {
-    margin: 0;
-  }
-}
-
-.content {
-  h1 {
-    margin: 0;
-  }
+  background: $light-white;
+  box-shadow: $box-shadow;
+  border-radius: 4 * $base;
+  max-width: 230 * $base;
+  margin: 10*$base auto;
 }
 
 button {
@@ -46,19 +34,46 @@ button {
     width: 2*$base;
     height: 2*$base;
   }
-background-color: $light-white;
-border: $border;
-box-sizing: border-box;
-border-radius: 1.6*$base;
-height: 6.4*$base;
-width: 6.4*$base;
-cursor: pointer;
+
+  background-color: $light-white;
+  border: $border;
+  box-sizing: border-box;
+  border-radius: 1.6*$base;
+  height: 6.4*$base;
+  width: 6.4*$base;
+  cursor: pointer;
 
 }
 
-.sneaker-img {
-  width: 26.6*$base;
-  height: 24.4*$base;
+//HEADER:
+
+header {
+  border-bottom: $border;
+
+  h3,
+  p {
+    margin: 0;
+  }
+}
+
+.logo {
+  width: 8*$base;
+  height: 8*$base;
+}
+
+//CONTENT WITH CARDS:
+.content {
+  h1 {
+    margin: 0;
+  }
+
+  button {
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 
 .card {
@@ -66,7 +81,16 @@ cursor: pointer;
   padding: 4*$base;
   width: 44*$base;
   border-radius: 8 * $base;
-  margin: 8*$base;
+  position: relative;
+  transition: $box-shadow 0.3s ease-in-out;
+  transform: 0.2s ease-in-out;
+
+
+  &:hover {
+    box-shadow: $box-shadow-strong;
+    transform: translateY(-$base);
+
+  }
 
   h5 {
     font-weight: 400;
@@ -81,8 +105,139 @@ cursor: pointer;
   b {
     font-size: 14px;
   }
+
+
 }
+
+.sneaker-img {
+  width: 26.6*$base;
+  height: 24.4*$base;
+}
+
 
 .sneaker-price {
   width: 30*$base;
+}
+
+.search-block {
+  border: $border;
+  border-radius: 10px;
+  padding: 2*$base 3*$base;
+}
+
+input {
+  all: unset;
+}
+
+.like-button {
+  img {
+    width: 14px;
+    height: 12px;
+  }
+
+  position: absolute;
+  top: $base*5;
+  left: $base*6;
+}
+
+//RIGHT MENU
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.right-menu {
+  position: absolute;
+  z-index: 2;
+  width: $base*77;
+  height: 100vh;
+  right: 0px;
+  top: 0px;
+
+  background: $light-white;
+  box-shadow: $box-shadow-strong;
+}
+
+
+.sneaker-right-card {
+  width: 65*$base;
+  height: 24*$base;
+  border: $border;
+  border-radius: 20px;
+
+  .sneaker-right-img {
+    width: 14*$base;
+    height: 14*$base;
+    margin: 4*$base;
+  }
+
+  .sneaker-right-text {
+    width: 30*$base;
+
+    h5 {
+      font-weight: 400;
+      margin: 0 0 8px 0;
+    }
+
+    h5,
+    b {
+      font-size: 13px;
+    }
+  }
+
+  .close-btn {
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+      transition: 0.2s;
+    }
+  }
+}
+
+.right-total {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  button {
+    width: 325px;
+    height: 55px;
+    background-color: $light-green;
+    border-radius: 20px;
+    color: $light-white;
+    font-weight: 600;
+    font-size: 15px;
+
+    &:hover {
+      box-shadow: $box-shadow-strong;
+      transition: 0.2s ease-in-out;
+    }
+  }
+
+  img {
+    width: 15px;
+  }
+}
+
+.dottes {
+  border-bottom: 1px dashed #DFDFDF;
+  width: 65%;
+  align-self: bottom;
+}
+
+.total-text {
+  height: 20px;
+  font-size: 16px;
+
+  h5 {
+    font-weight: 400;
+
+  }
 }
