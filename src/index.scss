@@ -86,48 +86,7 @@ header {
   }
 }
 
-.card {
-  border: $border;
-  padding: 4*$base;
-  width: 44*$base;
-  border-radius: 8 * $base;
-  position: relative;
-  transition: $box-shadow 0.3s ease-in-out;
-  transform: 0.2s ease-in-out;
-
-
-  &:hover {
-    box-shadow: $box-shadow-strong;
-    transform: translateY(-$base);
-
-  }
-
-  h5 {
-    font-weight: 400;
-    font-size: 14px;
-  }
-
-  span {
-    font-size: 13px;
-    opacity: 0.5;
-  }
-
-  b {
-    font-size: 14px;
-  }
-
-
-}
-
-.sneaker-img {
-  width: 26.6*$base;
-  height: 24.4*$base;
-}
-
-
-.sneaker-price {
-  width: 30*$base;
-}
+//SEARCH
 
 .search-block {
   border: $border;
@@ -139,16 +98,6 @@ input {
   all: unset;
 }
 
-.like-button {
-  img {
-    width: 14px;
-    height: 12px;
-  }
-
-  position: absolute;
-  top: $base*5;
-  left: $base*6;
-}
 
 //RIGHT MENU
 
