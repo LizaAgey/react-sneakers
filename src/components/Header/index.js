@@ -1,8 +1,10 @@
+import styles from "./Header.module.scss"
+
 function Header() {
     return (
         <header className="d-flex justify-between	align-center p-40">
-            <div className="headerLeft d-flex align-center">
-                <img src="/img/logo.png" alt="logo" className="logo"/>
+            <div className="d-flex align-center">
+                <img src="/img/logo.png" alt="logo" className={styles.logo}/>
 
                 <div className="ml-5">
                     <h3 className="text-uppercase">React Sneakers</h3>
@@ -11,7 +13,7 @@ function Header() {
             </div>
 
 
-            <ul className="headerRight d-flex">
+            <ul className="d-flex">
                 <li className="mr-30 d-flex align-center">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path

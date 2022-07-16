@@ -1,11 +1,15 @@
+@import "../../index.scss";
+
 .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: $border;
   padding: 4*$base;
   width: 44*$base;
   border-radius: 8 * $base;
   position: relative;
   transition: $box-shadow 0.3s ease-in-out;
-  transform: 0.2s ease-in-out;
 
 
   &:hover {
@@ -28,26 +32,29 @@
     font-size: 14px;
   }
 
-
-}
-
-.sneaker-img {
-  width: 26.6*$base;
-  height: 24.4*$base;
-}
-
-
-.sneaker-price {
-  width: 30*$base;
-}
-
-.like-button {
-  img {
-    width: 14px;
-    height: 12px;
+  .sneakerImg {
+    width: 26.6*$base;
+    height: 24.4*$base;
   }
 
-  position: absolute;
-  top: $base*5;
-  left: $base*6;
+
+  .sneakerPrice {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30*$base;
+  }
+
+  .likeButton {
+    img {
+      width: 14px;
+      height: 12px;
+    }
+
+    position: absolute;
+    top: $base*5;
+    left: $base*6;
+  }
+
 }
+

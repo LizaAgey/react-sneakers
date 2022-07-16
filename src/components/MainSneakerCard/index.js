@@ -1,19 +1,21 @@
+import styles from "./MainSneakerCard.module.scss"
+
 function MainSneakerCard (props) {
     const onClickPlus = () => {
         alert("Thank you for click!")
     }
     return (
-        <div className="card d-flex flex-column align-center ">
-            <button className="like-button">
-                <img src="/img/heart-general.svg" alt="Like" className=""/>
+        <div className={styles.card}>
+            <button className={styles.likeButton}>
+                <img src="/img/heart-general.svg" alt="Like"/>
             </button>
 
-            <img className="sneaker-img" src={props.imgUrl} alt="sneaker"/>
+            <img className={styles.sneakerImg} src={props.imgUrl} alt="sneaker"/>
             <h5>{props.title}</h5>
 
 
             <div className="d-flex justify-between align-center">
-                <div className="sneaker-price d-flex flex-column justify-between">
+                <div className={styles.sneakerPrice}>
                     <span className="text-uppercase ">Price:</span>
                     <b>{props.price} USD</b>
                 </div>

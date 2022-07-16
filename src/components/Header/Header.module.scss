@@ -1,0 +1,17 @@
+@import "../../index.scss";
+
+//HEADER:
+
+header {
+  border-bottom: $border;
+
+  h3,
+  p {
+    margin: 0;
+  }
+}
+
+.logo {
+  width: 8*$base;
+  height: 8*$base;
+}
