@@ -1,14 +1,15 @@
 import styles from "./RightMenu.module.scss"
 
 
-function RightMenu() {
+function RightMenu(props) {
     return (
         <div className={styles.overlay}>
             <div className={styles.rightMenu}>
                 <div className="d-flex align-center justify-between">
                     <h2 className="ml-30">My Cart</h2>
 
-                    <img src="/img/delete-button.svg" alt="Delete" className="button mr-40"/>
+                    <img onClick={props.onCloseCart} src="/img/delete-button.svg" alt="Delete"
+                         className="button mr-40"/>
 
                 </div>
 

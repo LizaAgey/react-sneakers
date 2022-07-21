@@ -3,22 +3,23 @@ import MainSneakerCard from "./components/MainSneakerCard";
 import Header from "./components/Header";
 import RightMenu from "./components/RightMenu";
 
-const arr = [{
-    title: "Man Sneakers Nike Blazer Mid Suede", price: 124, imgUrl: "/img/sneakers/1.jpg"
-}, {
-    title: "Man Sneakers Nike Air Max 270", price: 135, imgUrl: "/img/sneakers/2.jpg"
-}, {
-    title: "Man Sneakers Nike Blazer Mid Suede", price: 145, imgUrl: "/img/sneakers/3.jpg"
-}, {
-    title: "Man Sneakers Puma X Aka Boku Future Rider", price: 115, imgUrl: "/img/sneakers/4.jpg"
-}];
-
 function App() {
-    return (
-        <div className="wrapper clear">
+    const [isCartOpened, setCartOpened] = React.useState(false) //задаем Корзине состояние false (=closed)
+    const [items, setItems] = React.useState([])
 
-            <RightMenu/>
-            <Header/>
+    fetch('https://62d96da85d893b27b2e64d19.mockapi.io/items')
+        .then((response) => {
+            return response.json()
+        }).then((json) => {
+        setItems(json)
+    })
+
+    return (<div className="wrapper clear">
+
+            {isCartOpened && <RightMenu onCloseCart={() => setCartOpened(!isCartOpened)}/>}
+            {/*если состояние Корзины = true => открываем ее, если нет, то ничего не делаем*/}
+
+            <Header onClickCart={() => setCartOpened(!isCartOpened)}/>
 
             {/*CONTENT */}
             <div className="content p-40">
@@ -35,19 +36,18 @@ function App() {
 
 
                 {/* CARDS  */}
-                <div className="card-wrapper d-flex justify-between">
-                    {arr.map(obj => (<MainSneakerCard
+                <div className="card-wrapper d-flex justify-between flex-wrap">
+                    {items.map(obj => (<MainSneakerCard
                         title={obj.title}
                         price={obj.price}
                         imgUrl={obj.imgUrl}
                         // onClickPlus={() => console.log("Added to cart")}
                         // onClickFavorite={() => console.log("Added to favorite")}
-                        />))}
+                    />))}
                 </div>
             </div>
 
         </div>
-
 
     )
 }
