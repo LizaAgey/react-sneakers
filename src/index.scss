@@ -29,20 +29,19 @@ body {
   margin: 10*$base auto;
 }
 
-button {
-  img {
-    width: 2*$base;
-    height: 2*$base;
-  }
-
-  background-color: $light-white;
-  border: $border;
+.button {
   box-sizing: border-box;
   border-radius: 1.6*$base;
   height: 6.4*$base;
   width: 6.4*$base;
   cursor: pointer;
+  opacity: 0.8;
 
+  &:hover {
+    opacity: 1;
+    transition: 0.2s;
+    box-shadow: $box-shadow;
+  }
 }
 
 .close-btn {

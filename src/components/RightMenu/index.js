@@ -1,16 +1,15 @@
 import styles from "./RightMenu.module.scss"
 
 
-
 function RightMenu() {
     return (
-        <div style={{display: 'none'}} className={styles.overlay}>
+        <div className={styles.overlay}>
             <div className={styles.rightMenu}>
                 <div className="d-flex align-center justify-between">
                     <h2 className="ml-30">My Cart</h2>
-                    <button className="close-btn mr-45">
-                        <img src="/img/delete-button.svg" alt="Delete"/>
-                    </button>
+
+                    <img src="/img/delete-button.svg" alt="Delete" className="button mr-40"/>
+
                 </div>
 
 
@@ -22,12 +21,10 @@ function RightMenu() {
                             <h5>Мужские Кроссовки Nike Air Max 270</h5>
                             <b>155 USD</b>
                         </div>
-                        <button className="close-btn mr-20">
-                            <img src="/img/delete-button.svg" alt="Delete"/>
-                        </button>
+                        <img src="/img/delete-button.svg" alt="Delete" className="button mr-10"/>
                     </div>
 
-                    
+
                 </div>
 
                 <div className={styles.rightTotal}>

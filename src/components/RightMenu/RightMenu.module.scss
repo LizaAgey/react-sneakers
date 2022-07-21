@@ -79,6 +79,7 @@
     color: $light-white;
     font-weight: 600;
     font-size: 15px;
+    border: none;
 
     &:hover {
       background: lighten($light-green, 5%);

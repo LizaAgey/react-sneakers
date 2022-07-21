@@ -1,14 +1,24 @@
+import React from "react"
 import styles from "./MainSneakerCard.module.scss"
 
-function MainSneakerCard (props) {
+function MainSneakerCard(props) {
+    const [isAdded, setIsAdded] = React.useState(false)
+
     const onClickPlus = () => {
-        alert("Thank you for click!")
+        setIsAdded(!isAdded)
+        //конвертируем состоятине переменной в обратное
     }
+
+    // Пример использования useEffect:
+    // React.useEffect (() => {
+    //     console.log("Changed")
+    // }, [isAdded])
+
+    console.log(isAdded)
+
     return (
         <div className={styles.card}>
-            <button className={styles.likeButton}>
-                <img src="/img/heart-general.svg" alt="Like"/>
-            </button>
+            <img src="/img/heart-general.svg" alt="Like" className="button likeButton"/>
 
             <img className={styles.sneakerImg} src={props.imgUrl} alt="sneaker"/>
             <h5>{props.title}</h5>
@@ -19,9 +29,10 @@ function MainSneakerCard (props) {
                     <span className="text-uppercase ">Price:</span>
                     <b>{props.price} USD</b>
                 </div>
-                <button onClick={onClickPlus}>
-                    <img src="/img/plus-button.svg" alt="plus"/>
-                </button>
+                {/*<button>*/}
+                <img src={isAdded ? '/img/added-button.svg' : '/img/plus-button.svg'} alt="plus" onClick={onClickPlus}
+                     className="button"/>
+                {/*</button>*/}
             </div>
 
         </div>
