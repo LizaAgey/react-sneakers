@@ -1,30 +1,30 @@
 import styles from "./RightMenu.module.scss"
 
 
-function RightMenu(props) {
+function RightMenu({onCloseCart, items =[]}) {
     return (
         <div className={styles.overlay}>
             <div className={styles.rightMenu}>
                 <div className="d-flex align-center justify-between">
                     <h2 className="ml-30">My Cart</h2>
 
-                    <img onClick={props.onCloseCart} src="/img/delete-button.svg" alt="Delete"
+                    <img onClick={onCloseCart} src="/img/delete-button.svg" alt="Delete"
                          className="button mr-40"/>
 
                 </div>
 
 
                 <div className={styles.rightCards}>
-
-                    <div className={styles.sneakerRightCard}>
-                        <img src="/img/sneakers/1.jpg" alt="sneaker" className={styles.sneakerRightImg}/>
-                        <div className={styles.sneakerRightText}>
-                            <h5>Мужские Кроссовки Nike Air Max 270</h5>
-                            <b>155 USD</b>
+                    {items.map((obj) => (
+                        < div className={styles.sneakerRightCard}>
+                            <img src={obj.imgUrl} alt="sneaker" className={styles.sneakerRightImg}/>
+                            <div className={styles.sneakerRightText}>
+                                <h5>{obj.title}</h5>
+                                <b>{obj.price} USD</b>
+                            </div>
+                            <img src="/img/delete-button.svg" alt="Delete" className="button mr-10"/>
                         </div>
-                        <img src="/img/delete-button.svg" alt="Delete" className="button mr-10"/>
-                    </div>
-
+                    ))}
 
                 </div>
 
