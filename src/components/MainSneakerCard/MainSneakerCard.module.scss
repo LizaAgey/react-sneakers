@@ -6,7 +6,7 @@
   align-items: center;
   border: $border;
   padding: 4*$base;
-  margin-bottom: 4*$base;
+  margin: 4*$base;
   width: 44*$base;
   border-radius: 8 * $base;
   position: relative;
@@ -50,6 +50,7 @@
     position: absolute;
     top: $base*5;
     left: $base*6;
+
   }
 
 }

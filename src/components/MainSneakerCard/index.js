@@ -18,7 +18,7 @@ function MainSneakerCard({title, price, imgUrl,onPlus, onFavorite, id}) {
 
     return (
         <div className={styles.card}>
-            <img src="/img/heart-general.svg" alt="Like" className="button likeButton"/>
+            <img src="/img/heart-general.svg" alt="Like" className={styles.button + " " + styles.likeButton}/>
 
             <img className={styles.sneakerImg} src={imgUrl} alt="sneaker"/>
             <h5>{title}</h5>
