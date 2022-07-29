@@ -1,7 +1,7 @@
 import styles from "./RightMenu.module.scss"
 
 
-function RightMenu({onCloseCart, items =[]}) {
+function RightMenu({onCloseCart, items = [], onRemove}) {
     return (
         <div className={styles.overlay}>
             <div className={styles.rightMenu}>
@@ -22,7 +22,12 @@ function RightMenu({onCloseCart, items =[]}) {
                                 <h5>{obj.title}</h5>
                                 <b>{obj.price} USD</b>
                             </div>
-                            <img src="/img/delete-button.svg" alt="Delete" className="button mr-10"/>
+                            <img src="/img/delete-button.svg"
+                                 alt="Delete"
+                                 className="button mr-10"
+                                 onClick={() => {
+                                     onRemove(obj.id)
+                                 }}/>
                         </div>
                     ))}
 

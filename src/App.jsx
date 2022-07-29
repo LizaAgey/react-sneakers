@@ -2,6 +2,7 @@ import React from "react"
 import MainSneakerCard from "./components/MainSneakerCard";
 import Header from "./components/Header";
 import RightMenu from "./components/RightMenu";
+import axios from 'axios'
 
 function App() {
     const [isCartOpened, setCartOpened] = React.useState(false) //задаем Корзине состояние false (=closed)
@@ -13,35 +14,49 @@ function App() {
         setSearchValue(event.target.value)
     }
 
-
+    //----------ДОБАВЛЕНИЕ В КОРЗИНУ ЭЛЕМЕНТОВ
     const addToCart = (newItem) => {
 
-        //если нажали на плюс и Кроссовки уже есть в корзине, то удаляем, если нет, то добавляем
-        if (cartItems.some(cartItem => cartItem.id === newItem.id)) {
-            setCartItems(currentCartItems =>
-                currentCartItems.filter(cartItem => {
-                    return cartItem.id !== newItem.id;
-                }))
-        } else {
-            setCartItems(previous => [...previous, newItem])
-        }
+        axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/cart', newItem)
+        setCartItems((previous) => [...previous, newItem])
     }
 
+    //---------УДАЛЕНИЕ ИЗ КОРЗИНЫ
+    const onRemoveCart = (id) => {
+        axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/cart/${id}`)
+        setCartItems((previous) => {previous.filter(item => item.id !== id)})
+    }
+
+
+    //-------------ПОЛУЧАЕМ ДАННЫЕ С СЕРВЕРА:
+
     React.useEffect(() => {
-        fetch('https://62d96da85d893b27b2e64d19.mockapi.io/items')
-            .then((response) => {
-                return response.json()
-            }).then((json) => {
-            setItems(json)
-        })
+        //---------------------1 вариант
+        //     fetch('https://62d96da85d893b27b2e64d19.mockapi.io/items')
+        //         .then((response) => {
+        //             return response.json()
+        //         }).then((json) => {
+        //         setItems(json)
+        //     })
+
+
+        //----------------2 вариант
+        axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/items')
+            .then(response => setItems(response.data))
+
+        axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/cart')
+            .then(response => setCartItems(response.data))
+
+
     }, [])
-    //выполняем функцию внутри только если ничего не изменилось, т.е при первом рендеренге App.js
+    // выполняем функцию при первом рендеринге (когда ничего дркго не происходит)
 
 
     return (<div className="wrapper clear">
 
             {isCartOpened && <RightMenu onCloseCart={() => setCartOpened(!isCartOpened)}
-                                        items={cartItems}/>}
+                                        items={cartItems}
+                                        onRemove={onRemoveCart}/>}
             {/*если состояние Корзины = true => открываем ее, если нет, то ничего не делаем*/}
 
 
@@ -76,17 +91,17 @@ function App() {
                 {/* CARDS  */}
                 <div className="card-wrapper d-flex justify-center flex-wrap">
                     {items
-                        .filter((item) =>item.title.toLowerCase().includes(searchValue.toLowerCase()))
+                        .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
                         .map((item) =>
-                        (<MainSneakerCard
-                            key={item.id}
-                            title={item.title}
-                            price={item.price}
-                            imgUrl={item.imgUrl}
-                            id={item.id}
-                            onPlus={(objItem) => (addToCart(objItem))}
-                            onFavorite={() => console.log("Favorites are changed")}
-                        />))}
+                            (<MainSneakerCard
+                                key={item.numm}
+                                title={item.title}
+                                price={item.price}
+                                imgUrl={item.imgUrl}
+                                numm={item.numm}
+                                onPlus={(objItem) => (addToCart(objItem))}
+                                onFavorite={() => console.log("Favorites are changed")}
+                            />))}
                 </div>
             </div>
 

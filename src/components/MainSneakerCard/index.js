@@ -1,11 +1,11 @@
 import React from "react"
 import styles from "./MainSneakerCard.module.scss"
 
-function MainSneakerCard({title, price, imgUrl,onPlus, onFavorite, id}) {
+function MainSneakerCard({title, price, imgUrl,onPlus, onFavorite, numm}) {
     const [isAdded, setIsAdded] = React.useState(false)
 
     const onClickPlus = () => {
-        onPlus({title, price, imgUrl, id});
+        onPlus({title, price, imgUrl, numm});
         setIsAdded(!isAdded)
         //конвертируем состоятине переменной в обратное
     }
