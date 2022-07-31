@@ -18,7 +18,7 @@ function App() {
     const addToCart = (newItem) => {
 
         axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/cart', newItem)
-        setCartItems((previous) => [...previous, newItem])
+        setCartItems((prev) => [...prev, newItem]);
     }
 
     //---------УДАЛЕНИЕ ИЗ КОРЗИНЫ

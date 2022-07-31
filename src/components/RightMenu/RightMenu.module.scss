@@ -2,12 +2,13 @@
 //RIGHT MENU
 
 .overlay {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
-  height: 100vh;
+  min-height: 100%;
+  height: 100%;
   z-index: 1;
 }
 
@@ -23,6 +24,41 @@
 
   background: $light-white;
   box-shadow: $box-shadow-strong;
+}
+
+.greenBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: auto;
+  height: 55px;
+  background-color: $light-green;
+  border-radius: 20px;
+  color: $light-white;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  position: relative;
+
+  img {
+    position: absolute;
+  }
+
+  &:hover {
+    background: lighten($light-green, 5%);
+    transition: 0.2s ease-in-out;
+
+    img {
+
+      transition: transform 0.2s ease-in-out;
+    }
+  }
+
+  &:active {
+    background: darken($light-green, 10%);
+    transition: 0.2s ease-in-out;
+  }
 }
 
 .rightCards {
@@ -67,45 +103,25 @@
   flex-direction: column;
   margin: 30px;
 
-  .greenBtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    width: 325px;
-    height: 55px;
-    background-color: $light-green;
-    border-radius: 20px;
-    color: $light-white;
-    font-weight: 600;
-    font-size: 15px;
-    border: none;
+ &:hover {
+   img {
+     transform: translateX(5px);
+   }
+ }
 
-    &:hover {
-      background: lighten($light-green, 5%);
-      transition: 0.2s ease-in-out;
-
-      img {
-        transform: translateX(5px);
-        transition: transform 0.2s ease-in-out;
-      }
-    }
-
-    &:active {
-      background: darken($light-green, 10%);
-      transition: 0.2s ease-in-out;
-    }
-  }
 
   img {
     width: 15px;
+    top: 22px;
+    right: 60px;
   }
+
 }
 
 .dottes {
   border-bottom: 1px dashed #DFDFDF;
   width: 60%;
-  align-self: bottom;
+  align-self: end;
   position: relative;
   bottom: -4px;
   margin: 0 $base;
@@ -122,5 +138,30 @@
   h5 {
     font-weight: 400;
 
+  }
+}
+
+.emptyCartWrapper {
+  margin: 100px 45px;
+
+  .emptyCartImg {
+    width: 120px;
+    height: 120px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  button {
+    img {
+      top: 22px;
+      left: 15px;
+    }
+    &:hover {
+      img {
+        transform: translateX(-5px);
+      }
+    }
   }
 }
