@@ -14,15 +14,15 @@ function RightMenu({onCloseCart, items = [], onRemove}) {
 
                 </div>
 
-                <div className={styles.emptyCartWrapper + ' d-flex flex-column justify-center'}>
-                    <img src="/img/empty-cart.png" alt="Empty Cart" className={styles.emptyCartImg + " " + styles.alignCenter}/>
-                    <h3 className={styles.alignCenter}>The cart is empty</h3>
-                    <p className={styles.alignCenter}>Add at least one pair of sneakers to make an order.</p>
-                    <button className={styles.greenBtn + " " + styles.alignCeter}>
-                        <img src="/img/array-left.png" alt="Back" className="ml-30"/>
-                        <h3>Back to the shop</h3>
-                    </button>
-                </div>
+                {/*<div className={styles.emptyCartWrapper + ' d-flex flex-column justify-center'}>*/}
+                {/*    <img src="/img/empty-cart.png" alt="Empty Cart" className={styles.emptyCartImg + " " + styles.alignCenter}/>*/}
+                {/*    <h3 className={styles.alignCenter}>The cart is empty</h3>*/}
+                {/*    <p className={styles.alignCenter}>Add at least one pair of sneakers to make an order.</p>*/}
+                {/*    <button className={styles.greenBtn + " " + styles.alignCeter}>*/}
+                {/*        <img src="/img/array-left.png" alt="Back" className="ml-30"/>*/}
+                {/*        <h3>Back to the shop</h3>*/}
+                {/*    </button>*/}
+                {/*</div>*/}
 
 
                 <div className={styles.rightCards}>

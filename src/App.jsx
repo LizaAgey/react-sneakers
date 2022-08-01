@@ -16,15 +16,17 @@ function App() {
 
     //----------ДОБАВЛЕНИЕ В КОРЗИНУ ЭЛЕМЕНТОВ
     const addToCart = (newItem) => {
-
         axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/cart', newItem)
-        setCartItems((prev) => [...prev, newItem]);
+        setCartItems((previous) => [...previous,newItem])
+
     }
 
     //---------УДАЛЕНИЕ ИЗ КОРЗИНЫ
     const onRemoveCart = (id) => {
         axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/cart/${id}`)
-        setCartItems((previous) => {previous.filter(item => item.id !== id)})
+        setCartItems((previous) => {
+            previous.filter(item => item.id !== id)
+        })
     }
 
 
@@ -42,12 +44,14 @@ function App() {
 
         //----------------2 вариант
         axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/items')
-            .then(response => setItems(response.data))
+            .then((response) => {
+                setItems(response.data)
+            })
 
         axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/cart')
-            .then(response => setCartItems(response.data))
-
-
+            .then((response) => {
+                setCartItems(response.data)
+            })
     }, [])
     // выполняем функцию при первом рендеринге (когда ничего дркго не происходит)
 
