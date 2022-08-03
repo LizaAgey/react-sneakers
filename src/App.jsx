@@ -8,6 +8,7 @@ function App() {
     const [isCartOpened, setCartOpened] = React.useState(false) //задаем Корзине состояние false (=closed)
     const [items, setItems] = React.useState([])
     const [cartItems, setCartItems] = React.useState([])
+    const [favorites, setFavorites] = React.useState([])
     const [searchValue, setSearchValue] = React.useState('')
 
     const onChangeSearchInput = (event) => {
@@ -17,18 +18,25 @@ function App() {
     //----------ДОБАВЛЕНИЕ В КОРЗИНУ ЭЛЕМЕНТОВ
     const addToCart = (newItem) => {
         axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/cart', newItem)
-        setCartItems((previous) => [...previous,newItem])
+        setCartItems((previous) => [...previous, newItem])
 
     }
 
     //---------УДАЛЕНИЕ ИЗ КОРЗИНЫ
     const onRemoveCart = (id) => {
         axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/cart/${id}`)
-        setCartItems((previous) => {
-            previous.filter(item => item.id !== id)
-        })
+        setCartItems((previous) => previous.filter(item => item.id !== id)
+        )
+        console.log(id)
     }
 
+
+    //----------ДОБАВЛЕНИЕ В ЗАКЛАДКИ
+    const onAddToFavorites = (newItem) => {
+        axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/favorites', newItem)
+        setFavorites((previous) => [...previous, newItem])
+
+    }
 
     //-------------ПОЛУЧАЕМ ДАННЫЕ С СЕРВЕРА:
 
@@ -40,8 +48,6 @@ function App() {
         //         }).then((json) => {
         //         setItems(json)
         //     })
-
-
         //----------------2 вариант
         axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/items')
             .then((response) => {
@@ -58,9 +64,11 @@ function App() {
 
     return (<div className="wrapper clear">
 
-            {isCartOpened && <RightMenu onCloseCart={() => setCartOpened(!isCartOpened)}
+            {isCartOpened && <RightMenu
+                                        onCloseCart={() => setCartOpened(!isCartOpened)}
                                         items={cartItems}
-                                        onRemove={onRemoveCart}/>}
+                                        onRemove={onRemoveCart}
+            />}
             {/*если состояние Корзины = true => открываем ее, если нет, то ничего не делаем*/}
 
 
@@ -102,9 +110,8 @@ function App() {
                                 title={item.title}
                                 price={item.price}
                                 imgUrl={item.imgUrl}
-                                numm={item.numm}
                                 onPlus={(objItem) => (addToCart(objItem))}
-                                onFavorite={() => console.log("Favorites are changed")}
+                                onFavorite={(objItem) => (onAddToFavorites(objItem))}
                             />))}
                 </div>
             </div>

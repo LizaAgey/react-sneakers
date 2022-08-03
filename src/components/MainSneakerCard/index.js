@@ -1,12 +1,20 @@
 import React from "react"
 import styles from "./MainSneakerCard.module.scss"
 
-function MainSneakerCard({title, price, imgUrl,onPlus, onFavorite, numm}) {
+function MainSneakerCard({title, price, imgUrl,onPlus, onFavorite}) {
     const [isAdded, setIsAdded] = React.useState(false)
+    const [isFavorite, setIsFavorite] = React.useState(false)
+
 
     const onClickPlus = () => {
-        onPlus({title, price, imgUrl, numm});
+        onPlus({title, price, imgUrl});
         setIsAdded(!isAdded)
+        //конвертируем состоятине переменной в обратное
+    }
+
+    const onClickFavorite = () => {
+        onFavorite({title, price, imgUrl});
+        setIsFavorite(!isFavorite)
         //конвертируем состоятине переменной в обратное
     }
 
@@ -18,7 +26,10 @@ function MainSneakerCard({title, price, imgUrl,onPlus, onFavorite, numm}) {
 
     return (
         <div className={styles.card}>
-            <img src="/img/heart-general.svg" alt="Like" className={styles.button + " " + styles.likeButton}/>
+            <img src={isFavorite ? '/img/heart-active.svg' : '/img/heart-inactive.png'}
+                 onClick={onClickFavorite}
+                 alt="Like"
+                 className={styles.button + " " + styles.likeButton}/>
 
             <img className={styles.sneakerImg} src={imgUrl} alt="sneaker"/>
             <h5>{title}</h5>
