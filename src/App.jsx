@@ -1,8 +1,11 @@
 import React from "react"
-import MainSneakerCard from "./components/MainSneakerCard";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import axios from 'axios'
 import Header from "./components/Header";
 import RightMenu from "./components/RightMenu";
-import axios from 'axios'
+import Home from "./pages/Home"
+import Favorites from "./pages/Favorites"
+
 
 function App() {
     const [isCartOpened, setCartOpened] = React.useState(false) //задаем Корзине состояние false (=closed)
@@ -25,8 +28,7 @@ function App() {
     //---------УДАЛЕНИЕ ИЗ КОРЗИНЫ
     const onRemoveCart = (id) => {
         axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/cart/${id}`)
-        setCartItems((previous) => previous.filter(item => item.id !== id)
-        )
+        setCartItems((previous) => previous.filter(item => item.id !== id))
         console.log(id)
     }
 
@@ -62,62 +64,39 @@ function App() {
     // выполняем функцию при первом рендеринге (когда ничего дркго не происходит)
 
 
-    return (<div className="wrapper clear">
+    return (
+        <Router>
 
-            {isCartOpened && <RightMenu
-                                        onCloseCart={() => setCartOpened(!isCartOpened)}
-                                        items={cartItems}
-                                        onRemove={onRemoveCart}
-            />}
-            {/*если состояние Корзины = true => открываем ее, если нет, то ничего не делаем*/}
+            <div className="wrapper clear">
 
-
-            <Header onClickCart={() => setCartOpened(!isCartOpened)}/>
-
-
-            {/*CONTENT */}
-            <div className="content p-40">
-
-                {/* Line before cards  */}
-                <div className="d-flex align-center justify-between mb-40">
-
-                    <h1 className="opacity-5">{searchValue ? `Search of '${searchValue}'` : 'All sneakers'}</h1>
-                    <div className="search-block d-flex align-center">
-                        <img src="/img/search.svg" alt="Search"/>
-                        {searchValue && (
-                            <img src="/img/delete-button.svg"
-                                 alt="Clear"
-                                 className="button deleteSearch"
-                                 onClick={() => {
-                                     setSearchValue('')
-                                 }}/>)}
-                        <input onChange={onChangeSearchInput}
-                               value={searchValue}
-                               placeholder="Search..."
-                               className="pl-15 opacity-5"/>
-                        {/* value={searchValue} - контролируемый input (обновляется в зависимости от состояния serachValue*/}
-                    </div>
-                </div>
+                {isCartOpened && <RightMenu
+                    onCloseCart={() => setCartOpened(!isCartOpened)}
+                    items={cartItems}
+                    onRemove={onRemoveCart}
+                />}
+                {/*если состояние Корзины = true => открываем ее, если нет, то ничего не делаем*/}
 
 
-                {/* CARDS  */}
-                <div className="card-wrapper d-flex justify-center flex-wrap">
-                    {items
-                        .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-                        .map((item) =>
-                            (<MainSneakerCard
-                                key={item.numm}
-                                title={item.title}
-                                price={item.price}
-                                imgUrl={item.imgUrl}
-                                onPlus={(objItem) => (addToCart(objItem))}
-                                onFavorite={(objItem) => (onAddToFavorites(objItem))}
-                            />))}
-                </div>
+                <Header onClickCart={() => setCartOpened(!isCartOpened)}/>
+                <Routes>
+                    <Route exact path="/" element={
+                        <Home
+                            searchValue={searchValue}
+                            items={items}
+                            setSearchValue={setSearchValue}
+                            onChangeSearchInput={onChangeSearchInput}
+                            addToCart={addToCart}
+                            onAddToFavorites={onAddToFavorites}/>
+                    }/>
+
+
+                    <Route exact path={"/favorites"} element={
+                        <Favorites/>
+                    }/>
+                </Routes>
             </div>
 
-        </div>
-
+        </Router>
     )
 }
 
