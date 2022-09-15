@@ -41,11 +41,9 @@ function Home({
                     .map((item) =>
                         (<MainSneakerCard
                             key={item.numm}
-                            title={item.title}
-                            price={item.price}
-                            imgUrl={item.imgUrl}
                             onPlus={(objItem) => (addToCart(objItem))}
                             onFavorite={(objItem) => (onAddToFavorites(objItem))}
+                            {...item}
                         />))}
             </div>
         </div>

@@ -1,9 +1,9 @@
 import React from "react"
 import styles from "./MainSneakerCard.module.scss"
 
-function MainSneakerCard({title, price, imgUrl,onPlus, onFavorite}) {
+function MainSneakerCard({id, title, price, imgUrl,onPlus, onFavorite, favorited = false}) {
     const [isAdded, setIsAdded] = React.useState(false)
-    const [isFavorite, setIsFavorite] = React.useState(false)
+    const [isFavorite, setIsFavorite] = React.useState(favorited)
 
 
     const onClickPlus = () => {
@@ -13,7 +13,7 @@ function MainSneakerCard({title, price, imgUrl,onPlus, onFavorite}) {
     }
 
     const onClickFavorite = () => {
-        onFavorite({title, price, imgUrl});
+        onFavorite({title, price, imgUrl, id});
         setIsFavorite(!isFavorite)
         //конвертируем состоятине переменной в обратное
     }

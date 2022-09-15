@@ -33,11 +33,20 @@ function App() {
     }
 
 
-    //----------ДОБАВЛЕНИЕ В ЗАКЛАДКИ
-    const onAddToFavorites = (newItem) => {
-        axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/favorites', newItem)
-        setFavorites((previous) => [...previous, newItem])
-
+    //----------ДОБАВЛЕНИЕ и УДАЛЕНИЕ из ЗАКЛАДОК
+    const onClickToFavorites = async (newItem) => {
+        try {
+            if (favorites.find(obj => obj.id === newItem.id)) {
+                axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/favorites/${newItem.id}`)
+            } else {
+                const {data} = await axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/favorites', newItem)
+                // дожидаемся ответа сервера, вытягиваем данные c сервера и передаем их дальше ->
+                // чтобы при добавлении item  в favorites и при его удалении id брался с сервера, а не с клиента и не было разницы в них
+                setFavorites((previous) => [...previous, data])
+            }
+        } catch (error) {
+            alert ("Can not add to favorites :(")
+        }
     }
 
     //-------------ПОЛУЧАЕМ ДАННЫЕ С СЕРВЕРА:
@@ -59,6 +68,11 @@ function App() {
         axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/cart')
             .then((response) => {
                 setCartItems(response.data)
+            })
+
+        axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/favorites')
+            .then((response) => {
+                setFavorites(response.data)
             })
     }, [])
     // выполняем функцию при первом рендеринге (когда ничего дркго не происходит)
@@ -86,12 +100,15 @@ function App() {
                             setSearchValue={setSearchValue}
                             onChangeSearchInput={onChangeSearchInput}
                             addToCart={addToCart}
-                            onAddToFavorites={onAddToFavorites}/>
+                            onAddToFavorites={onClickToFavorites}/>
                     }/>
 
 
                     <Route exact path={"/favorites"} element={
-                        <Favorites/>
+                        <Favorites
+                            items={favorites}
+                            onAddToFavorites={onClickToFavorites}
+                        />
                     }/>
                 </Routes>
             </div>
