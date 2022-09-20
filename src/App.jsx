@@ -13,6 +13,7 @@ function App() {
     const [cartItems, setCartItems] = React.useState([])
     const [favorites, setFavorites] = React.useState([])
     const [searchValue, setSearchValue] = React.useState('')
+    const [isLoading, setIsLoading] = React.useState(true);
 
     const onChangeSearchInput = (event) => {
         setSearchValue(event.target.value)
@@ -20,9 +21,21 @@ function App() {
 
     //----------ДОБАВЛЕНИЕ В КОРЗИНУ ЭЛЕМЕНТОВ
     const addToCart = (newItem) => {
-        axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/cart', newItem)
-        setCartItems((previous) => [...previous, newItem])
-
+        console.log(newItem)
+        try {
+            //если при нажатии объект уже существует в корзине, то удали его с клиента и сервера
+            if (cartItems.find((item) => Number(item.id) === Number(newItem.id))) {
+                axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/cart/${newItem.id}`)
+                setCartItems(previous => previous.filter(item => Number(item.id) !== Number(newItem.id)))
+            }
+            // в противном случае добавь его на клиенте и сервере
+            else {
+                axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/cart', newItem)
+                setCartItems((previous) => [...previous, newItem])
+            }
+        } catch {
+            alert("Can not add to the cart :(")
+        }
     }
 
     //---------УДАЛЕНИЕ ИЗ КОРЗИНЫ
@@ -45,7 +58,7 @@ function App() {
                 setFavorites((previous) => [...previous, data])
             }
         } catch (error) {
-            alert ("Can not add to favorites :(")
+            alert("Can not add to favorites :(")
         }
     }
 
@@ -60,20 +73,35 @@ function App() {
         //         setItems(json)
         //     })
         //----------------2 вариант
-        axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/items')
-            .then((response) => {
-                setItems(response.data)
-            })
+        // axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/items')
+        //     .then((response) => {
+        //         setItems(response.data)
+        //     })
 
-        axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/cart')
-            .then((response) => {
-                setCartItems(response.data)
-            })
+        async function fetchData() {
+            try {
+                setIsLoading(true)
+                //если функция с промисами выполняется несколько раз
 
-        axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/favorites')
-            .then((response) => {
-                setFavorites(response.data)
-            })
+                const [cartResponse, favoritesResponse, itemsResponse] = await Promise.all([
+
+                    axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/cart'),
+                    axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/favorites'),
+                    axios.get('https://62d96da85d893b27b2e64d19.mockapi.io/items'),
+                ]);
+
+                setIsLoading(false);
+                setCartItems(cartResponse.data);
+                setFavorites(favoritesResponse.data);
+                setItems(itemsResponse.data);
+            } catch (error) {
+                alert('Error while data receiving ;(');
+                console.error(error);
+            }
+        }
+
+        fetchData() //ждем, пока прогрузится картина и избранное, чтобы потом отобразить состояние карточек на гл.вкладке
+
     }, [])
     // выполняем функцию при первом рендеринге (когда ничего дркго не происходит)
 
@@ -97,10 +125,14 @@ function App() {
                         <Home
                             searchValue={searchValue}
                             items={items}
+                            cartItems={cartItems}
                             setSearchValue={setSearchValue}
                             onChangeSearchInput={onChangeSearchInput}
                             addToCart={addToCart}
-                            onAddToFavorites={onClickToFavorites}/>
+                            onAddToFavorites={onClickToFavorites}
+                            isLoading={isLoading}
+                        />
+
                     }/>
 
 

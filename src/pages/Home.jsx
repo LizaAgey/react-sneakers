@@ -3,12 +3,28 @@ import MainSneakerCard from "../components/MainSneakerCard";
 
 function Home({
                   items,
+                  cartItems,
                   searchValue,
                   setSearchValue,
                   onChangeSearchInput,
                   addToCart,
                   onAddToFavorites
               }) {
+    const renderItems = () => {
+       return items
+            .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+            .map((item, index) =>
+                (<MainSneakerCard
+                    key={index}
+                    onPlus={(objItem) => (addToCart(objItem))}
+                    onFavorite={(objItem) => (onAddToFavorites(objItem))}
+                    added = {cartItems.some(objItem => Number(objItem.id) === Number(item.id))}
+                    isLoading={false}
+                    {...item}
+                />))
+    }
+
+
     return (
         <div className="content p-40">
 
@@ -36,15 +52,7 @@ function Home({
 
             {/* CARDS  */}
             <div className="card-wrapper d-flex justify-center flex-wrap">
-                {items
-                    .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-                    .map((item) =>
-                        (<MainSneakerCard
-                            key={item.numm}
-                            onPlus={(objItem) => (addToCart(objItem))}
-                            onFavorite={(objItem) => (onAddToFavorites(objItem))}
-                            {...item}
-                        />))}
+                {renderItems()}
             </div>
         </div>
     )

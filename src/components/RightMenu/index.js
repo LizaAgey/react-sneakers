@@ -17,7 +17,7 @@ function RightMenu({onCloseCart, items = [], onRemove}) {
                 {items.length > 0 ?
                     (<div className={styles.rightCards}>
                         {items.map((obj) => (
-                            <div className={styles.sneakerRightCard}>
+                            <div key= {obj.id} className={styles.sneakerRightCard}>
                                 <img src={obj.imgUrl} alt="sneaker" className={styles.sneakerRightImg}/>
                                 <div className={styles.sneakerRightText}>
                                     <h5>{obj.title}</h5>
