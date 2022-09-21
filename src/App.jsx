@@ -6,6 +6,8 @@ import RightMenu from "./components/RightMenu";
 import Home from "./pages/Home"
 import Favorites from "./pages/Favorites"
 
+export const AppContext = React.createContext({})
+
 
 function App() {
     const [isCartOpened, setCartOpened] = React.useState(false) //задаем Корзине состояние false (=closed)
@@ -107,45 +109,48 @@ function App() {
 
 
     return (
-        <Router>
 
-            <div className="wrapper clear">
+        <AppContext.Provider value = {{cartItems, favorites, items}}>
+            <Router>
 
-                {isCartOpened && <RightMenu
-                    onCloseCart={() => setCartOpened(!isCartOpened)}
-                    items={cartItems}
-                    onRemove={onRemoveCart}
-                />}
-                {/*если состояние Корзины = true => открываем ее, если нет, то ничего не делаем*/}
+                <div className="wrapper clear">
 
-
-                <Header onClickCart={() => setCartOpened(!isCartOpened)}/>
-                <Routes>
-                    <Route exact path="/" element={
-                        <Home
-                            searchValue={searchValue}
-                            items={items}
-                            cartItems={cartItems}
-                            setSearchValue={setSearchValue}
-                            onChangeSearchInput={onChangeSearchInput}
-                            addToCart={addToCart}
-                            onAddToFavorites={onClickToFavorites}
-                            isLoading={isLoading}
-                        />
-
-                    }/>
+                    {isCartOpened && <RightMenu
+                        onCloseCart={() => setCartOpened(!isCartOpened)}
+                        items={cartItems}
+                        onRemove={onRemoveCart}
+                    />}
+                    {/*если состояние Корзины = true => открываем ее, если нет, то ничего не делаем*/}
 
 
-                    <Route exact path={"/favorites"} element={
-                        <Favorites
-                            items={favorites}
-                            onAddToFavorites={onClickToFavorites}
-                        />
-                    }/>
-                </Routes>
-            </div>
+                    <Header onClickCart={() => setCartOpened(!isCartOpened)}/>
+                    <Routes>
+                        <Route exact path="/" element={
+                            <Home
+                                searchValue={searchValue}
+                                items={items}
+                                cartItems={cartItems}
+                                setSearchValue={setSearchValue}
+                                onChangeSearchInput={onChangeSearchInput}
+                                addToCart={addToCart}
+                                onAddToFavorites={onClickToFavorites}
+                                isLoading={isLoading}
+                            />
 
-        </Router>
+                        }/>
+
+
+                        <Route exact path={"/favorites"} element={
+                            <Favorites
+                                items={favorites}
+                                onAddToFavorites={onClickToFavorites}
+                            />
+                        }/>
+                    </Routes>
+                </div>
+
+            </Router>
+        </AppContext.Provider>
     )
 }
 

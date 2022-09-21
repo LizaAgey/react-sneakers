@@ -8,18 +8,24 @@ function Home({
                   setSearchValue,
                   onChangeSearchInput,
                   addToCart,
-                  onAddToFavorites
+                  onAddToFavorites,
+                  isLoading
               }) {
     const renderItems = () => {
-       return items
-            .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+
+        const filteredItems = items && items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+
+        return (
+            isLoading
+                ? [...Array(8)]
+                : filteredItems)
             .map((item, index) =>
                 (<MainSneakerCard
                     key={index}
                     onPlus={(objItem) => (addToCart(objItem))}
                     onFavorite={(objItem) => (onAddToFavorites(objItem))}
-                    added = {cartItems.some(objItem => Number(objItem.id) === Number(item.id))}
-                    isLoading={false}
+                    added={cartItems.some(objItem => Number(objItem.id) === Number(item.id))}
+                    isLoading={isLoading}
                     {...item}
                 />))
     }
