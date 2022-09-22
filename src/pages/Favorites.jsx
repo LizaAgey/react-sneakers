@@ -1,10 +1,12 @@
 import React from "react";
 import MainSneakerCard from "../components/MainSneakerCard";
+import AppContext from "../context";
 
-function Favorites({
-                       items,
-                       onAddToFavorites
-                   }) {
+function Favorites({onAddToFavorites}) {
+
+    const {favorites} = React.useContext(AppContext)
+    // сохраняем нужные данные в переменную из контекста . если что-то в данных меняется, то делаем ре-рендер
+
     return (
         <div className="content p-40">
 
@@ -15,14 +17,13 @@ function Favorites({
 
             {/* CARDS  */}
             <div className="card-wrapper d-flex justify-center flex-wrap">
-                {items
-                    .map((item) =>
-                        (<MainSneakerCard
-                            key={items.id}
-                            favorited={true}
-                            onFavorite={onAddToFavorites}
-                            {...item}
-                        />))}
+                {favorites.map((item, index) =>
+                    (<MainSneakerCard
+                        key={index}
+                        favorited={true}
+                        onFavorite={onAddToFavorites}
+                        {...item}
+                    />))}
             </div>
         </div>
     )

@@ -1,9 +1,10 @@
 import React from "react";
 import MainSneakerCard from "../components/MainSneakerCard";
+import AppContext from "../context";
+
 
 function Home({
                   items,
-                  cartItems,
                   searchValue,
                   setSearchValue,
                   onChangeSearchInput,
@@ -11,23 +12,27 @@ function Home({
                   onAddToFavorites,
                   isLoading
               }) {
+    const {isItemAddedToCart} = React.useContext(AppContext)
+    // сохраняем нужные данные в переменную из контекста . если что-то в данных меняется, то делаем ре-рендер
+
     const renderItems = () => {
 
-        const filteredItems = items && items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+        const filteredItems = items.filter((item) =>
+            item.title.toLowerCase().includes(searchValue.toLowerCase()))
+        // возвращает первое ложное выражение или..
+        // если оба выражения были истинными, то возвращает последний
 
-        return (
-            isLoading
-                ? [...Array(8)]
-                : filteredItems)
-            .map((item, index) =>
-                (<MainSneakerCard
-                    key={index}
-                    onPlus={(objItem) => (addToCart(objItem))}
-                    onFavorite={(objItem) => (onAddToFavorites(objItem))}
-                    added={cartItems.some(objItem => Number(objItem.id) === Number(item.id))}
-                    isLoading={isLoading}
-                    {...item}
-                />))
+        return (isLoading
+            ? [...Array(8)]
+            : filteredItems).map((item, index) => (
+            <MainSneakerCard
+                key={index}
+                onPlus={(objItem) => (addToCart(objItem))}
+                onFavorite={(objItem) => (onAddToFavorites(objItem))}
+                addedStatus={isItemAddedToCart(item && item.id)}
+                isLoading={isLoading}
+                {...item}
+            />))
     }
 
 

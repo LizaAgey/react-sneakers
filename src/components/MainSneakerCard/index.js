@@ -10,16 +10,22 @@ function MainSneakerCard({
                              onPlus,
                              onFavorite,
                              favorited = false,
-                             added = false,
+                             addedStatus,
                              isLoading = false
                          }) {
-    const [isAdded, setIsAdded] = React.useState(added)
+
+    console.log("initial addedStatus", addedStatus)
+
+    const [isAddedState, setIsAddedState] = React.useState(addedStatus)
+    if (isAddedState !== addedStatus) {
+        console.log(id, isAddedState, addedStatus)
+    }
     const [isFavorite, setIsFavorite] = React.useState(favorited)
 
 
     const onClickPlus = () => {
         onPlus({id, title, price, imgUrl});
-        setIsAdded(!isAdded)
+        setIsAddedState(!isAddedState)
         //конвертируем состоятине переменной в обратное
     }
 
@@ -32,7 +38,7 @@ function MainSneakerCard({
     // Пример использования useEffect:
     // React.useEffect (() => {
     //     console.log("Changed")
-    // }, [isAdded])
+    // }, [isAddedState])
 
 
     return (
@@ -74,7 +80,8 @@ function MainSneakerCard({
 
 
                             {/*<button>*/}
-                            <img src={isAdded ? '/img/added-button.svg' : '/img/plus-button.svg'}
+                            {console.log("3", isAddedState, addedStatus)}
+                            <img src={addedStatus ? '/img/added-button.svg' : '/img/plus-button.svg'}
                                  alt="plus"
                                  onClick={onClickPlus}
                                  className="button"/>

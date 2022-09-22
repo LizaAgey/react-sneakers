@@ -5,8 +5,7 @@ import Header from "./components/Header";
 import RightMenu from "./components/RightMenu";
 import Home from "./pages/Home"
 import Favorites from "./pages/Favorites"
-
-export const AppContext = React.createContext({})
+import AppContext from "./context";
 
 
 function App() {
@@ -107,10 +106,15 @@ function App() {
     }, [])
     // выполняем функцию при первом рендеринге (когда ничего дркго не происходит)
 
+    const isItemAddedToCart = (id) => {
+        return cartItems.some((obj) => Number(obj.id) === Number(id))
+    }
+
+    // если хотя бы один из ID в корзине равен передаваемому ID, то возвращаем true
 
     return (
 
-        <AppContext.Provider value = {{cartItems, favorites, items}}>
+        <AppContext.Provider value={{cartItems, favorites, items, isItemAddedToCart}}>
             <Router>
 
                 <div className="wrapper clear">
