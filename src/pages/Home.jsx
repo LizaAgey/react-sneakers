@@ -1,6 +1,6 @@
 import React from "react";
 import MainSneakerCard from "../components/MainSneakerCard";
-import AppContext from "../context";
+
 
 
 function Home({
@@ -12,8 +12,7 @@ function Home({
                   onAddToFavorites,
                   isLoading
               }) {
-    const {isItemAddedToCart} = React.useContext(AppContext)
-    // сохраняем нужные данные в переменную из контекста . если что-то в данных меняется, то делаем ре-рендер
+
 
     const renderItems = () => {
 
@@ -29,7 +28,6 @@ function Home({
                 key={index}
                 onPlus={(objItem) => (addToCart(objItem))}
                 onFavorite={(objItem) => (onAddToFavorites(objItem))}
-                addedStatus={isItemAddedToCart(item && item.id)}
                 isLoading={isLoading}
                 {...item}
             />))

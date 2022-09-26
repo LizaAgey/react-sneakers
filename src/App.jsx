@@ -50,8 +50,9 @@ function App() {
     //----------ДОБАВЛЕНИЕ и УДАЛЕНИЕ из ЗАКЛАДОК
     const onClickToFavorites = async (newItem) => {
         try {
-            if (favorites.find(obj => obj.id === newItem.id)) {
+            if (favorites.find(obj => Number(obj.id) === Number(newItem.id))) {
                 axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/favorites/${newItem.id}`)
+                setFavorites((previous) => previous.filter((item) => Number(item.id) !== Number(newItem.id)))
             } else {
                 const {data} = await axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/favorites', newItem)
                 // дожидаемся ответа сервера, вытягиваем данные c сервера и передаем их дальше ->
@@ -114,7 +115,15 @@ function App() {
 
     return (
 
-        <AppContext.Provider value={{cartItems, favorites, items, isItemAddedToCart}}>
+        <AppContext.Provider value={{
+            cartItems,
+            favorites,
+            items,
+            isItemAddedToCart,
+            onClickToFavorites,
+            setCartOpened,
+            setCartItems
+        }}>
             <Router>
 
                 <div className="wrapper clear">

@@ -1,6 +1,7 @@
 import React from "react"
 import styles from "./MainSneakerCard.module.scss"
 import ContentLoader from "react-content-loader"
+import AppContext from "../../context";
 
 function MainSneakerCard({
                              id,
@@ -10,23 +11,16 @@ function MainSneakerCard({
                              onPlus,
                              onFavorite,
                              favorited = false,
-                             addedStatus,
                              isLoading = false
                          }) {
 
-    console.log("initial addedStatus", addedStatus)
-
-    const [isAddedState, setIsAddedState] = React.useState(addedStatus)
-    if (isAddedState !== addedStatus) {
-        console.log(id, isAddedState, addedStatus)
-    }
+    const {isItemAddedToCart} = React.useContext(AppContext)
+    // сохраняем нужные данные в переменную из контекста . если что-то в данных меняется, то делаем ре-рендер
     const [isFavorite, setIsFavorite] = React.useState(favorited)
 
 
     const onClickPlus = () => {
         onPlus({id, title, price, imgUrl});
-        setIsAddedState(!isAddedState)
-        //конвертируем состоятине переменной в обратное
     }
 
     const onClickFavorite = () => {
@@ -80,8 +74,8 @@ function MainSneakerCard({
 
 
                             {/*<button>*/}
-                            {console.log("3", isAddedState, addedStatus)}
-                            <img src={addedStatus ? '/img/added-button.svg' : '/img/plus-button.svg'}
+
+                            <img src={isItemAddedToCart(id) ? '/img/added-button.svg' : '/img/plus-button.svg'}
                                  alt="plus"
                                  onClick={onClickPlus}
                                  className="button"/>

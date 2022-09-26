@@ -2,9 +2,9 @@ import React from "react";
 import MainSneakerCard from "../components/MainSneakerCard";
 import AppContext from "../context";
 
-function Favorites({onAddToFavorites}) {
+function Favorites() {
 
-    const {favorites} = React.useContext(AppContext)
+    const {favorites, onClickToFavorites} = React.useContext(AppContext)
     // сохраняем нужные данные в переменную из контекста . если что-то в данных меняется, то делаем ре-рендер
 
     return (
@@ -21,7 +21,7 @@ function Favorites({onAddToFavorites}) {
                     (<MainSneakerCard
                         key={index}
                         favorited={true}
-                        onFavorite={onAddToFavorites}
+                        onFavorite={onClickToFavorites }
                         {...item}
                     />))}
             </div>
