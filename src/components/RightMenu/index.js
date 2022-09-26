@@ -38,6 +38,9 @@ function RightMenu({onCloseCart, items = [], onRemove}) {
         setIsLoading(false)
     }
 
+    const totalCartPrice = cartItems.reduce((sum, object) => object.price + sum, 0)
+    const taxPart = 0.1
+
     return (
         <div className={styles.overlay}>
             <div className={styles.rightMenu}>
@@ -77,12 +80,12 @@ function RightMenu({onCloseCart, items = [], onRemove}) {
                         <div className={styles.totalText}>
                             <h5>Total:</h5>
                             <div className={styles.dottes}></div>
-                            <b>155 USD</b>
+                            <b>{totalCartPrice} USD</b>
                         </div>
                         <div className={styles.totalText}>
-                            <h5>Tax 10%:</h5>
+                            <h5>Tax {taxPart * 100}%:</h5>
                             <div className={styles.dottes}></div>
-                            <b>15 USD</b>
+                            <b>{Math.round(totalCartPrice * taxPart)} USD</b>
                         </div>
                         <button disabled={isLoading} onClick={onClickOrderCompletion} className={styles.greenBtn}>
                             <h3>Make an order</h3>
