@@ -1,15 +1,15 @@
 import React from "react"
 import styles from "./RightMenu.module.scss"
 import StatusBlock from "../StatusBlock/StatusBlock";
-import AppContext from "../../context";
 import axios from "axios";
+import {useCartItems} from "../../hooks/useCartItems";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 
 function RightMenu({onCloseCart, items = [], onRemove}) {
 
-    const {cartItems, setCartItems} = React.useContext(AppContext)
+    const {cartItems, setCartItems, totalCartPrice} = useCartItems()
     const [isOrderCompleted, setIsOrderCompleted] = React.useState(false)
     const [orderID, setOrderID] = React.useState(0)
     const [isLoading, setIsLoading] = React.useState(false)
@@ -38,7 +38,6 @@ function RightMenu({onCloseCart, items = [], onRemove}) {
         setIsLoading(false)
     }
 
-    const totalCartPrice = cartItems.reduce((sum, object) => object.price + sum, 0)
     const taxPart = 0.1
 
     return (
