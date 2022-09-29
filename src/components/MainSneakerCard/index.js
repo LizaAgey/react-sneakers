@@ -75,10 +75,10 @@ function MainSneakerCard({
 
                             {/*<button>*/}
 
-                            <img src={isItemAddedToCart(id) ? '/img/added-button.svg' : '/img/plus-button.svg'}
-                                 alt="plus"
-                                 onClick={onClickPlus}
-                                 className="button"/>
+                            {onPlus && <img src={isItemAddedToCart(id) ? '/img/added-button.svg' : '/img/plus-button.svg'}
+                                  alt="plus"
+                                  onClick={onClickPlus}
+                                  className="button"/>}
                             {/*</button>*/}
                         </div>
                     </>

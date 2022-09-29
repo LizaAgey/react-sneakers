@@ -3,11 +3,11 @@
 .card {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   border: $border;
   padding: 4*$base;
   margin: 4*$base;
-  width: 44*$base;
+   width: 44*$base;
   border-radius: 8 * $base;
   position: relative;
   transition: $box-shadow 0.3s ease-in-out;
@@ -36,6 +36,7 @@
   .sneakerImg {
     width: 26.6*$base;
     height: 24.4*$base;
+    margin-left: 4*$base;
   }
 
 

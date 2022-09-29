@@ -59,11 +59,11 @@ function Header(props) {
                     </Link>
                 </li>
 
-                <ReactTooltip id="ordersTip" place="top" effect="solid">
+                <ReactTooltip id="ordersTip" place="bottom" effect="solid">
                     <p>Orders</p>
                 </ReactTooltip>
 
-                <li data-tip data-for="favsTip" className="ml-10">
+                <li data-tip data-for="favsTip" className="ml-40">
                     <Link to="/favorites">
                         <svg width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
