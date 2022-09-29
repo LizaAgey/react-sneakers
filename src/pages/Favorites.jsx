@@ -4,7 +4,7 @@ import AppContext from "../context";
 
 function Favorites() {
 
-    const {favorites, onClickToFavorites} = React.useContext(AppContext)
+    const {favorites, onClickToFavorites, isLoading} = React.useContext(AppContext)
     // сохраняем нужные данные в переменную из контекста . если что-то в данных меняется, то делаем ре-рендер
 
     return (
@@ -22,6 +22,7 @@ function Favorites() {
                         key={index}
                         favorited={true}
                         onFavorite={onClickToFavorites }
+                        isLoading={isLoading}
                         {...item}
                     />))}
             </div>

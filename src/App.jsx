@@ -6,6 +6,7 @@ import RightMenu from "./components/RightMenu";
 import Home from "./pages/Home"
 import Favorites from "./pages/Favorites"
 import AppContext from "./context";
+import Orders from "./pages/Orders";
 
 
 function App() {
@@ -122,7 +123,8 @@ function App() {
             isItemAddedToCart,
             onClickToFavorites,
             setCartOpened,
-            setCartItems
+            setCartItems,
+            addToCart,
         }}>
             <Router>
 
@@ -159,6 +161,11 @@ function App() {
                                 onAddToFavorites={onClickToFavorites}
                             />
                         }/>
+
+                        <Route exact path={"/orders"} element={
+                            <Orders/>
+                        }/>
+
                     </Routes>
                 </div>
 
