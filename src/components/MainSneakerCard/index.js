@@ -59,7 +59,7 @@ function MainSneakerCard({
                     </ContentLoader>
                 ) : (
                     <>
-                        {onFavorite && <img src={isFavorite ? '/img/heart-active.svg' : '/img/heart-inactive.png'}
+                        {onFavorite && <img src={isFavorite ? 'img/heart-active.svg' : 'img/heart-inactive.png'}
                                             onClick={onClickFavorite}
                                             alt="Like"
                                             className={styles.button + " " + styles.likeButton}/>}
@@ -78,7 +78,7 @@ function MainSneakerCard({
                             {/*<button>*/}
 
                             {onPlus &&
-                                <img src={isItemAddedToCart(id) ? '/img/added-button.svg' : '/img/plus-button.svg'}
+                                <img src={isItemAddedToCart(id) ? 'img/added-button.svg' : 'img/plus-button.svg'}
                                      alt="plus"
                                      onClick={onClickPlus}
                                      className="button"/>}

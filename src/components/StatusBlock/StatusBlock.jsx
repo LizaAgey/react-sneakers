@@ -13,7 +13,7 @@ const StatusBlock = ({image, title, description}) => {
             <h3 className={styles.alignCenter}>{title}</h3>
             <p className={styles.alignCenter}>{description}</p>
             <button onClick={() => setCartOpened(false)} className={styles.greenBtn + " " + styles.alignCeter}>
-                <img src="/img/array-left.png" alt="Back" className="ml-30"/>
+                <img src="img/array-left.png" alt="Back" className="ml-30"/>
                 <h3 >Back to the shop</h3>
             </button>
         </div>

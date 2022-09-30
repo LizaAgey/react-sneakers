@@ -48,7 +48,7 @@ function Orders() {
                         }
                     </div>)
                 : <EmptyContentScreen
-                    image="/img/sad2_emoji.png"
+                    image="img/sad2_emoji.png"
                     title="No orders"
                     text="Find something lovely on the main page"
                 />}

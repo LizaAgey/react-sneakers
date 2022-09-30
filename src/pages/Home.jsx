@@ -42,9 +42,9 @@ function Home({
 
                 <h1 className="opacity-5">{searchValue ? `Search of '${searchValue}'` : 'All sneakers'}</h1>
                 <div className="search-block d-flex align-center">
-                    <img src="/img/search.svg" alt="Search"/>
+                    <img src="img/search.svg" alt="Search"/>
                     {searchValue && (
-                        <img src="/img/delete-button.svg"
+                        <img src="img/delete-button.svg"
                              alt="Clear"
                              className="button deleteSearch"
                              onClick={() => {

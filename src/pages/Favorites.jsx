@@ -29,7 +29,7 @@ function Favorites() {
                             />))}
                     </div>)
                 : <EmptyContentScreen
-                    image="/img/sad1_emoji.png"
+                    image="img/sad1_emoji.png"
                     title="No favorites"
                     text="Find something lovely on the main page"
                 />}

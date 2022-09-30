@@ -14,7 +14,7 @@ function Header(props) {
         <header className="d-flex justify-between	align-center p-40">
             <Link to="/">
                 <div className="d-flex align-center">
-                    <img src="/img/logo.png" alt="logo" className={styles.logo}/>
+                    <img src="img/logo.png" alt="logo" className={styles.logo}/>
 
                     <div className="ml-5">
                         <h3 className="text-uppercase">React Sneakers</h3>

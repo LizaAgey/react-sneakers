@@ -46,7 +46,7 @@ function RightMenu({onCloseCart, items = [], onRemove, openedMode}) {
                 <div className="d-flex align-center justify-between">
                     <h2 className="ml-30">My Cart</h2>
 
-                    <img onClick={onCloseCart} src="/img/delete-button.svg" alt="Delete"
+                    <img onClick={onCloseCart} src="img/delete-button.svg" alt="Delete"
                          className="button mr-40"/>
 
                 </div>
@@ -60,7 +60,7 @@ function RightMenu({onCloseCart, items = [], onRemove, openedMode}) {
                                     <h5>{obj.title}</h5>
                                     <b>{obj.price} USD</b>
                                 </div>
-                                <img src="/img/delete-button.svg"
+                                <img src="img/delete-button.svg"
                                      alt="Delete"
                                      className="button mr-10"
                                      onClick={() => onRemove(obj.id)}/>
@@ -71,7 +71,7 @@ function RightMenu({onCloseCart, items = [], onRemove, openedMode}) {
                     (<StatusBlock
                         title={isOrderCompleted ? 'The order is completed!' : 'The cart is empty'}
                         description={isOrderCompleted ? `Your order #${orderID} is waiting for delivery` : 'Add at least one item to make an order'}
-                        image={isOrderCompleted ? '/img/order-completed.jpg' : '/img/empty-cart.png'}/>)
+                        image={isOrderCompleted ? 'img/order-completed.jpg' : 'img/empty-cart.png'}/>)
                 }
 
                 {items.length > 0 ?
@@ -88,7 +88,7 @@ function RightMenu({onCloseCart, items = [], onRemove, openedMode}) {
                         </div>
                         <button disabled={isLoading} onClick={onClickOrderCompletion} className={styles.greenBtn}>
                             <h3>Make an order</h3>
-                            <img src="/img/array-right.svg" alt="Next" className="ml-30"/>
+                            <img src="img/array-right.svg" alt="Next" className="ml-30"/>
                         </button>
                     </div>) :
 
