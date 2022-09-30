@@ -25,15 +25,26 @@ function App() {
     const addToCart = async (newItem) => {
         console.log(newItem)
         try {
+            const findItem = cartItems.find((item) => Number(item.parentId) === Number(newItem.id))
+
             //если при нажатии объект уже существует в корзине, то удали его с клиента и сервера
-            if (cartItems.find((item) => Number(item.id) === Number(newItem.id))) {
-                setCartItems(previous => previous.filter(item => Number(item.id) !== Number(newItem.id)))
-                await axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/cart/${newItem.id}`)
+            if (findItem) {
+                setCartItems(previous => previous.filter(item => Number(item.parentId) !== Number(newItem.id)))
+                await axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/cart/${findItem.id}`)
             }
             // в противном случае добавь его на клиенте и сервере
             else {
                 setCartItems((previous) => [...previous, newItem])
-               await axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/cart', newItem)
+                const {data} = await axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/cart', newItem)
+                setCartItems((previous) => previous.map(item => {
+                   if (Number(item.parentId === Number(data.parentId))) {
+                       return {
+                           ...item,
+                           id: data.id
+                       }
+                   }
+                   return item
+                }))
             }
         } catch {
             alert("Can not add to the cart :(")
@@ -44,7 +55,7 @@ function App() {
     const onRemoveCart = (id) => {
         try {
             axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/cart/${id}`)
-            setCartItems((previous) => previous.filter(item => item.id !== id))
+            setCartItems((previous) => previous.filter(item => Number(item.id) !== Number(id)))
             console.log(id)
         } catch (error) {
             alert("Can not delete from the cart :(")

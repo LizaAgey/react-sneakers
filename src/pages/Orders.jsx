@@ -3,6 +3,7 @@ import axios from "axios";
 
 import AppContext from "../context";
 import MainSneakerCard from "../components/MainSneakerCard";
+import EmptyContentScreen from "../components/EmptyContentScreen/EmptyContentScreen";
 
 
 function Orders() {
@@ -35,16 +36,22 @@ function Orders() {
             </div>
 
 
-            {/* CARDS  */}
-            <div className="card-wrapper d-flex justify-center flex-wrap">
-                {(isLoading ? [...Array(8)] : orders).map((item, index) => (
-                    <MainSneakerCard
-                        key={index}
-                        isLoading={isLoading}
-                        {...item}
-                    />))
-                }
-            </div>
+            {(orders.length > 0)
+                ? (
+                    <div className="card-wrapper d-flex justify-center flex-wrap">
+                        {(isLoading ? [...Array(8)] : orders).map((item, index) => (
+                            <MainSneakerCard
+                                key={index}
+                                isLoading={isLoading}
+                                {...item}
+                            />))
+                        }
+                    </div>)
+                : <EmptyContentScreen
+                    image="/img/sad2_emoji.png"
+                    title="No orders"
+                    text="Find something lovely on the main page"
+                />}
         </div>
     )
 }
