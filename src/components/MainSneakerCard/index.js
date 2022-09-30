@@ -17,14 +17,16 @@ function MainSneakerCard({
     const {isItemAddedToCart} = React.useContext(AppContext)
     // сохраняем нужные данные в переменную из контекста . если что-то в данных меняется, то делаем ре-рендер
     const [isFavorite, setIsFavorite] = React.useState(favorited)
+    const itemOject = {id, parentId: id, title, price, imgUrl}
+        //объект с данными карточки. parentId - это ID изначлаьной карточки, который потом уходит в корзину и там запоминается
 
 
     const onClickPlus = () => {
-        onPlus({id, title, price, imgUrl});
+        onPlus(itemOject);
     }
 
     const onClickFavorite = () => {
-        onFavorite({title, price, imgUrl, id});
+        onFavorite(itemOject);
         setIsFavorite(!isFavorite)
         //конвертируем состоятине переменной в обратное
     }
@@ -57,10 +59,10 @@ function MainSneakerCard({
                     </ContentLoader>
                 ) : (
                     <>
-                        <img src={isFavorite ? '/img/heart-active.svg' : '/img/heart-inactive.png'}
-                             onClick={onClickFavorite}
-                             alt="Like"
-                             className={styles.button + " " + styles.likeButton}/>
+                        {onFavorite && <img src={isFavorite ? '/img/heart-active.svg' : '/img/heart-inactive.png'}
+                                            onClick={onClickFavorite}
+                                            alt="Like"
+                                            className={styles.button + " " + styles.likeButton}/>}
 
                         <img className={styles.sneakerImg} src={imgUrl} alt="sneaker"/>
                         <h5>{title}</h5>
@@ -75,10 +77,11 @@ function MainSneakerCard({
 
                             {/*<button>*/}
 
-                            {onPlus && <img src={isItemAddedToCart(id) ? '/img/added-button.svg' : '/img/plus-button.svg'}
-                                  alt="plus"
-                                  onClick={onClickPlus}
-                                  className="button"/>}
+                            {onPlus &&
+                                <img src={isItemAddedToCart(id) ? '/img/added-button.svg' : '/img/plus-button.svg'}
+                                     alt="plus"
+                                     onClick={onClickPlus}
+                                     className="button"/>}
                             {/*</button>*/}
                         </div>
                     </>

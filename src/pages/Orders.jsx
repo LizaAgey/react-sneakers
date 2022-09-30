@@ -40,7 +40,6 @@ function Orders() {
                 {(isLoading ? [...Array(8)] : orders).map((item, index) => (
                     <MainSneakerCard
                         key={index}
-                        onFavorite={(objItem) => (onAddToFavorites(objItem))}
                         isLoading={isLoading}
                         {...item}
                     />))

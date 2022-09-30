@@ -22,18 +22,18 @@ function App() {
     }
 
     //----------ДОБАВЛЕНИЕ В КОРЗИНУ ЭЛЕМЕНТОВ
-    const addToCart = (newItem) => {
+    const addToCart = async (newItem) => {
         console.log(newItem)
         try {
             //если при нажатии объект уже существует в корзине, то удали его с клиента и сервера
             if (cartItems.find((item) => Number(item.id) === Number(newItem.id))) {
-                axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/cart/${newItem.id}`)
                 setCartItems(previous => previous.filter(item => Number(item.id) !== Number(newItem.id)))
+                await axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/cart/${newItem.id}`)
             }
             // в противном случае добавь его на клиенте и сервере
             else {
-                axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/cart', newItem)
                 setCartItems((previous) => [...previous, newItem])
+               await axios.post('https://62d96da85d893b27b2e64d19.mockapi.io/cart', newItem)
             }
         } catch {
             alert("Can not add to the cart :(")
@@ -42,9 +42,14 @@ function App() {
 
     //---------УДАЛЕНИЕ ИЗ КОРЗИНЫ
     const onRemoveCart = (id) => {
-        axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/cart/${id}`)
-        setCartItems((previous) => previous.filter(item => item.id !== id))
-        console.log(id)
+        try {
+            axios.delete(`https://62d96da85d893b27b2e64d19.mockapi.io/cart/${id}`)
+            setCartItems((previous) => previous.filter(item => item.id !== id))
+            console.log(id)
+        } catch (error) {
+            alert("Can not delete from the cart :(")
+            console.error()
+        }
     }
 
 
@@ -62,6 +67,7 @@ function App() {
             }
         } catch (error) {
             alert("Can not add to favorites :(")
+            console.error(error);
         }
     }
 
@@ -109,7 +115,8 @@ function App() {
     // выполняем функцию при первом рендеринге (когда ничего дркго не происходит)
 
     const isItemAddedToCart = (id) => {
-        return cartItems.some((obj) => Number(obj.id) === Number(id))
+        return cartItems.some((obj) => Number(obj.parentId) === Number(id))
+        // сверяем id со стр Home  с тем parentId, который был передан в Корзину
     }
 
     // если хотя бы один из ID в корзине равен передаваемому ID, то возвращаем true
@@ -130,15 +137,15 @@ function App() {
 
                 <div className="wrapper clear">
 
-                    {isCartOpened && <RightMenu
-                        onCloseCart={() => setCartOpened(!isCartOpened)}
+                    <RightMenu
+                        onCloseCart={() => setCartOpened(false)}
                         items={cartItems}
                         onRemove={onRemoveCart}
-                    />}
-                    {/*если состояние Корзины = true => открываем ее, если нет, то ничего не делаем*/}
+                        openedMode={isCartOpened}
+                    />
 
 
-                    <Header onClickCart={() => setCartOpened(!isCartOpened)}/>
+                    <Header onClickCart={() => setCartOpened(true)}/>
                     <Routes>
                         <Route exact path="/" element={
                             <Home

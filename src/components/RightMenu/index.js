@@ -7,7 +7,7 @@ import {useCartItems} from "../../hooks/useCartItems";
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 
-function RightMenu({onCloseCart, items = [], onRemove}) {
+function RightMenu({onCloseCart, items = [], onRemove, openedMode}) {
 
     const {cartItems, setCartItems, totalCartPrice} = useCartItems()
     const [isOrderCompleted, setIsOrderCompleted] = React.useState(false)
@@ -41,7 +41,7 @@ function RightMenu({onCloseCart, items = [], onRemove}) {
     const taxPart = 0.1
 
     return (
-        <div className={styles.overlay}>
+        <div className={`${styles.overlay} ${openedMode ? styles.overlayVisible : ""}`}>
             <div className={styles.rightMenu}>
                 <div className="d-flex align-center justify-between">
                     <h2 className="ml-30">My Cart</h2>
