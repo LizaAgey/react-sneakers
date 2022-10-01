@@ -1,5 +1,5 @@
 import React from "react"
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import axios from 'axios'
 import Header from "./components/Header";
 import RightMenu from "./components/RightMenu";
@@ -144,7 +144,7 @@ function App() {
             setCartItems,
             addToCart,
         }}>
-            <Router>
+            <HashRouter>
 
                 <div className="wrapper clear">
 
@@ -187,7 +187,7 @@ function App() {
                     </Routes>
                 </div>
 
-            </Router>
+            </HashRouter>
         </AppContext.Provider>
     )
 }
