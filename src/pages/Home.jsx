@@ -40,11 +40,11 @@ function Home({
             {/* Line before cards  */}
             <div className="d-flex align-center justify-between mb-40">
 
-                <h1 className="opacity-5">{searchValue ? `Search of '${searchValue}'` : 'All sneakers'}</h1>
+                <h1 className="titleSearch opacity-5">{searchValue ? `Search of '${searchValue}'` : 'All sneakers'}</h1>
                 <div className="search-block d-flex align-center">
-                    <img src="img/search.svg" alt="Search"/>
+                    <img src={process.env.PUBLIC_URL +'img/search.svg'} alt="Search"/>
                     {searchValue && (
-                        <img src="img/delete-button.svg"
+                        <img src={process.env.PUBLIC_URL + 'img/delete-button.svg'}
                              alt="Clear"
                              className="button deleteSearch"
                              onClick={() => {
@@ -53,7 +53,7 @@ function Home({
                     <input onChange={onChangeSearchInput}
                            value={searchValue}
                            placeholder="Search..."
-                           className="pl-15 opacity-5"/>
+                           className="pl-15 opacity-5 mr-30"/>
                     {/* value={searchValue} - контролируемый input (обновляется в зависимости от состояния serachValue*/}
                 </div>
             </div>
